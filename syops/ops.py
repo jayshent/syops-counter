@@ -352,6 +352,7 @@ MODULES_MAPPING = {
     nn.InstanceNorm2d: bn_syops_counter_hook,
     nn.InstanceNorm3d: bn_syops_counter_hook,
     nn.GroupNorm: bn_syops_counter_hook,
+    nn.LayerNorm: bn_syops_counter_hook,
     # FC
     nn.Linear: linear_syops_counter_hook,
     # Upscale
