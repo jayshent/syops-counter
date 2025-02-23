@@ -17,7 +17,7 @@ except:
  """
  
 from spikingjelly.activation_based.neuron import MultiStepIFNode, MultiStepLIFNode, IFNode, LIFNode, MultiStepParametricLIFNode, ParametricLIFNode
-from from spikingjelly.activation_based.layer import Conv2d 
+from spikingjelly.activation_based.layer import Conv2d 
  
 def spike_rate(inp):
     # T = inp.shape[1]
