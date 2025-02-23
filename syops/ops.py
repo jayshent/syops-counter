@@ -9,12 +9,16 @@ Copyright (C) 2022 Guangyao Chen - All Rights Reserved
 import torch
 import numpy as np
 import torch.nn as nn
-try:
+""" try:
     from spikingjelly.clock_driven.neuron import MultiStepIFNode, MultiStepLIFNode, IFNode, LIFNode, MultiStepParametricLIFNode, ParametricLIFNode
 except:
     from spikingjelly.activation_based.neuron import MultiStepIFNode, MultiStepLIFNode, IFNode, LIFNode, MultiStepParametricLIFNode, ParametricLIFNode
 
-
+ """
+ 
+from spikingjelly.activation_based.neuron import MultiStepIFNode, MultiStepLIFNode, IFNode, LIFNode, MultiStepParametricLIFNode, ParametricLIFNode
+from from spikingjelly.activation_based.layer import Conv2d 
+ 
 def spike_rate(inp):
     # T = inp.shape[1]
     num = inp.unique()
@@ -304,6 +308,8 @@ def multihead_attention_counter_hook(multihead_attention_module, input, output):
 CUSTOM_MODULES_MAPPING = {}
 
 MODULES_MAPPING = {
+    # spikingjelly - convolutions
+    Conv2d: conv_syops_counter_hook,
     # convolutions
     nn.Conv1d: conv_syops_counter_hook,
     nn.Conv2d: conv_syops_counter_hook,
