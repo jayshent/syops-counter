@@ -129,8 +129,7 @@ def norm_syops_counter_hook(module, input, output):
     input = input[0]
     spike, rate = spike_rate(input)
     batch_syops = np.prod(input.shape)
-    if (getattr(module, 'affine', False)
-            or getattr(module, 'elementwise_affine', False)):
+    if (getattr(module, 'affine', False) or getattr(module, 'elementwise_affine', False)):
         batch_syops *= 2
     module.__syops__[0] += int(batch_syops)
 
