@@ -16,7 +16,7 @@ except:
 
  """
  
-from spikingjelly.activation_based.neuron import MultiStepIFNode, MultiStepLIFNode, IFNode, LIFNode, MultiStepParametricLIFNode, ParametricLIFNode
+from spikingjelly.activation_based.neuron import LIFNode
 from spikingjelly.activation_based.layer import Conv2d 
  
 def spike_rate(inp):
@@ -339,14 +339,14 @@ MODULES_MAPPING = {
     nn.BatchNorm3d: bn_syops_counter_hook,
 
     # Neuron IF
-    MultiStepIFNode: IF_syops_counter_hook,
-    IFNode: IF_syops_counter_hook,
+    #MultiStepIFNode: IF_syops_counter_hook,
+    #IFNode: IF_syops_counter_hook,
     # Neuron LIF
-    MultiStepLIFNode: LIF_syops_counter_hook,
+    #MultiStepLIFNode: LIF_syops_counter_hook,
     LIFNode: LIF_syops_counter_hook,
     # Neuron PLIF
-    MultiStepParametricLIFNode: LIF_syops_counter_hook,
-    ParametricLIFNode: LIF_syops_counter_hook,
+    #MultiStepParametricLIFNode: LIF_syops_counter_hook,
+    #ParametricLIFNode: LIF_syops_counter_hook,
 
     nn.InstanceNorm1d: bn_syops_counter_hook,
     nn.InstanceNorm2d: bn_syops_counter_hook,
