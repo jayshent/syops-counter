@@ -125,6 +125,21 @@ def bn_syops_counter_hook(module, input, output):
     
     module.__syops__[3] += rate * 100
 
+def norm_syops_counter_hook(module, input, output):
+    input = input[0]
+    spike, rate = spike_rate(input)
+    batch_syops = np.prod(input.shape)
+    if (getattr(module, 'affine', False)
+            or getattr(module, 'elementwise_affine', False)):
+        batch_syops *= 2
+    module.__syops__[0] += int(batch_syops)
+
+    if spike:
+        module.__syops__[1] += int(batch_syops) * rate
+    else:
+        module.__syops__[2] += int(batch_syops)
+    
+    module.__syops__[3] += rate * 100
 
 def conv_syops_counter_hook(conv_module, input, output):
     # Can have multiple inputs, getting the first one
@@ -352,7 +367,7 @@ MODULES_MAPPING = {
     nn.InstanceNorm2d: bn_syops_counter_hook,
     nn.InstanceNorm3d: bn_syops_counter_hook,
     nn.GroupNorm: bn_syops_counter_hook,
-    nn.LayerNorm: bn_syops_counter_hook,
+    nn.LayerNorm: norm_syops_counter_hook,
     # FC
     nn.Linear: linear_syops_counter_hook,
     # Upscale
